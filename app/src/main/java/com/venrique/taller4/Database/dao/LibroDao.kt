@@ -16,11 +16,11 @@ interface LibroDao {
     fun getAllBooks(): LiveData<List<Libro>>
 
     @Query("SELECT * FROM book where book_name=:name")
-    fun getBookByName(name:String)
+    fun getBookByName(name:String): Libro
 
     @Query("SELECT * from book where autor_id=:autorId")
     fun getBookByAutor(autorId: Int): LiveData<List<Libro>>
 
-    @Query("DELETE from book where Bid=:bookId")
-    fun deleteBook(bookId: Int)
+    @Query("DELETE from book")
+    fun deleteBook()
 }

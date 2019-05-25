@@ -23,5 +23,5 @@ interface AutorDao {
     fun selectAll(): List<Autor>
 
     @Query("SELECT * from autor where Aid=:id")
-    fun selectOne(id: Int)
+    fun selectOne(id: Int): Autor
 }

@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import com.venrique.taller4.Database.Entities.Autor
 import com.venrique.taller4.Database.Entities.Libro
 import com.venrique.taller4.Database.Entities.LibroTagJoin
+import com.venrique.taller4.Database.Entities.Tags
 import com.venrique.taller4.Database.dao.AutorDao
 import com.venrique.taller4.Database.dao.LibroDao
 import com.venrique.taller4.Database.dao.LibroTagJoinDao
@@ -36,7 +37,7 @@ class LibroRepository (private val autorDao: AutorDao,private val libroDao: Libr
         return autorDao.selectAll()
     }
 
-    fun selectOneautor(id: Int){
+    fun selectOneautor(id: Int): Autor{
         return autorDao.selectOne(id)
     }
 
@@ -52,7 +53,7 @@ class LibroRepository (private val autorDao: AutorDao,private val libroDao: Libr
         return libroDao.getAllBooks()
     }
 
-    fun getBookByName(name:String){
+    fun getBookByName(name:String): Libro{
         return libroDao.getBookByName(name)
     }
 
@@ -60,8 +61,8 @@ class LibroRepository (private val autorDao: AutorDao,private val libroDao: Libr
         return libroDao.getBookByAutor(autorId)
     }
 
-    fun deleteBook(bookId: Int){
-        libroDao.deleteBook(bookId)
+    fun deleteBook(){
+        libroDao.deleteBook()
     }
 
     //LibroTagJOinDao
@@ -71,7 +72,7 @@ class LibroRepository (private val autorDao: AutorDao,private val libroDao: Libr
         libroTagJoinDao.insert(libroTag)
     }
 
-    fun getBooksByTag(tagId: Int){
+    fun getBooksByTag(tagId: Int): List<LibroTagJoin>{
         return libroTagJoinDao.getBooksByTag(tagId)
     }
 
@@ -79,14 +80,14 @@ class LibroRepository (private val autorDao: AutorDao,private val libroDao: Libr
     //TagsDao
 
     @WorkerThread
-    suspend fun insert(tag: Tag){
+    suspend fun insert(tag: Tags){
         tagsDao.insert(tag)
     }
 
-    fun getAllTags(){
+    fun getAllTags(): List<Tags>{
         return tagsDao.getAllTags()
     }
-    fun getOneTag(id: Int){
+    fun getOneTag(id: Int): Tags{
         return tagsDao.getOneTag(id)
     }
 }
